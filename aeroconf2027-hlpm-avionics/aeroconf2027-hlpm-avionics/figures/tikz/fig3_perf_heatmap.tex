@@ -1,0 +1,30 @@
+% Figure 3 -- Median kernel latency on P1 (isolated, single core) normalized to serial C++.
+% Data: \figdata/fig3_heatmap.dat (x = kernel/size column, y = configuration row, ratio, log2r)
+\begin{tikzpicture}
+\begin{axis}[aeroconf,
+  width=0.48\linewidth, height=0.75\linewidth, scale only axis,
+  enlargelimits=false, axis on top, grid=none, y dir=reverse,
+  xmin=-0.5, xmax=5.5, ymin=-0.5, ymax=7.5,
+  xtick={0,...,5}, ytick={0,...,7},
+  xticklabels={{GEMM\\256},{GEMM\\512},{Conv\\512},{Conv\\1024},{KF\\4096},{KF\\32768}},
+  x tick label style={align=center, font=\tiny},
+  yticklabels={C++ serial, OpenCL PoCL, OpenCL Intel, SYCL OMP AOT USM, SYCL OMP JIT USM, SYCL OMP JIT buf, SYCL\textrightarrow{}OCL Intel USM, SYCL\textrightarrow{}OCL Intel buf},
+  y tick label style={font=\scriptsize}, major tick length=0pt,
+  axis line style={draw=none},
+  colormap={div}{rgb255=(28,92,171) rgb255=(134,182,239) rgb255=(240,239,236) rgb255=(240,163,162) rgb255=(181,47,46)},
+  point meta min=-3, point meta max=3,
+  colorbar, colorbar style={width=2.5mm, ytick={-3,-2,-1,0,1,2,3},
+     yticklabels={1/8,1/4,1/2,1,2,4,8}, tick label style={font=\scriptsize},
+     ylabel={median / C++ serial}, ylabel style={font=\scriptsize}}]
+  \addplot[matrix plot*, mesh/cols=6, point meta=\thisrow{log2r}] table[x=x, y=y] {\figdata/fig3_heatmap.dat};
+  % value labels: dark text on light cells, white text on saturated cells
+  \addplot[only marks, mark=none, nodes near coords={\pgfmathprintnumber[fixed, fixed zerofill, precision=2]{\ratio}},
+           nodes near coords style={font=\tiny, text=cInk, anchor=center},
+           visualization depends on={\thisrow{ratio} \as \ratio},
+           restrict expr to domain={abs(\thisrow{log2r})}{0:1.9}] table[x=x, y=y] {\figdata/fig3_heatmap.dat};
+  \addplot[only marks, mark=none, nodes near coords={\pgfmathprintnumber[fixed, precision=0]{\ratio}},
+           nodes near coords style={font=\tiny, text=white, anchor=center},
+           visualization depends on={\thisrow{ratio} \as \ratio},
+           restrict expr to domain={abs(\thisrow{log2r})}{1.9:10}] table[x=x, y=y] {\figdata/fig3_heatmap.dat};
+\end{axis}
+\end{tikzpicture}

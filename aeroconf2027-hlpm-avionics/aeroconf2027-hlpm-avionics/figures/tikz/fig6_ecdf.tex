@@ -1,0 +1,21 @@
+% Figure 6 -- Latency ECDFs on P2, isolated (solid) vs. memory co-runner (dashed). Data: \figdata/fig6_*.dat
+\begin{tikzpicture}
+\begin{groupplot}[aeroconf,
+  group style={group size=2 by 1, horizontal sep=8mm, y descriptions at=edge left},
+  width=0.5\linewidth, height=0.3\linewidth, xmode=log, ymin=0, ymax=1.02,
+  xlabel={latency ($\mu$s, log)}, ylabel={ECDF}, ytick={0,0.25,0.5,0.75,1}]
+  \nextgroupplot[title={GEMM 512}, title style={font=\footnotesize}, log ticks with fixed point, xtick={5000,10000,20000,50000,100000},
+     xticklabels={5k,10k,20k,50k,100k},
+     legend to name=ecdflegend, legend columns=2, legend style={font=\scriptsize, draw=none, /tikz/every even column/.append style={column sep=6pt}}]
+    \addplot[cNative, thick] table {\figdata/fig6_gemm512_cpu_iso.dat};     \addlegendentry{C++ serial (CPU 0), isolated}
+    \addplot[cOpenCL, thick] table {\figdata/fig6_gemm512_gpu_iso.dat};     \addlegendentry{OpenCL AMD iGPU, isolated}
+    \addplot[cNative, thick, dashed] table {\figdata/fig6_gemm512_cpu_intf.dat}; \addlegendentry{C++ serial (CPU 0), interference}
+    \addplot[cOpenCL, thick, dashed] table {\figdata/fig6_gemm512_gpu_intf.dat}; \addlegendentry{OpenCL AMD iGPU, interference}
+  \nextgroupplot[title={Kalman 32768}, title style={font=\footnotesize}, xtick={2000,3000,5000,10000,20000,30000}, xticklabels={2k,3k,5k,10k,20k,30k}]
+    \addplot[cNative, thick] table {\figdata/fig6_kalman32768_cpu_iso.dat};
+    \addplot[cOpenCL, thick] table {\figdata/fig6_kalman32768_gpu_iso.dat};
+    \addplot[cNative, thick, dashed] table {\figdata/fig6_kalman32768_cpu_intf.dat};
+    \addplot[cOpenCL, thick, dashed] table {\figdata/fig6_kalman32768_gpu_intf.dat};
+\end{groupplot}
+\node[below=9mm] at ($(group c1r1.south)!0.5!(group c2r1.south)$) {\pgfplotslegendfromname{ecdflegend}};
+\end{tikzpicture}

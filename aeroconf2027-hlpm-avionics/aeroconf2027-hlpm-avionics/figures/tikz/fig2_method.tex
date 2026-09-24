@@ -1,0 +1,20 @@
+% Figure 2 -- Flight-autonomy workloads and experimental factors (pure TikZ, full text width)
+\begin{tikzpicture}[
+  font=\footnotesize, >={Stealth[length=5pt]},
+  box/.style={draw=cInkTwo, rounded corners=3pt, align=center, minimum height=11mm, inner sep=3pt, line width=0.6pt},
+  lab/.style={font=\footnotesize\itshape, text=cInkTwo, anchor=west}]
+  % ---- pipeline
+  \node[lab] (L1) at (0,0) {Flight-autonomy pipeline (workloads)};
+  \node[box, fill=black!4, text width=22mm, below right=2mm and 0mm of L1.south west] (s)  {Sensors\\radar $\cdot$ EO/IR\\camera};
+  \node[box, text width=30mm, right=6mm of s] (k2) {K2 Conv2D $5{\times}5$\\perception\\pre-processing};
+  \node[box, text width=30mm, right=6mm of k2] (k3) {K3 Batched Kalman\\two-sensor\\track fusion};
+  \node[box, text width=34mm, right=6mm of k3] (k1) {K1 GEMM\\dense linear algebra\\(guidance / trajectory)};
+  \draw[->, cInkTwo, thick] (s) -- (k2); \draw[->, cInkTwo, thick] (k2) -- (k3); \draw[->, cInkTwo, thick] (k3) -- (k1);
+  % ---- factors
+  \node[lab, below=5mm of s.south west, anchor=north west] (L2) {Experimental factors};
+  \node[box, text width=33mm, below right=2mm and 0mm of L2.south west, anchor=north west] (f1) {\textbf{Programming model}\\C++ / OpenMP\\OpenCL (PoCL, Intel, AMD)\\SYCL (AdaptiveCpp)};
+  \node[box, text width=33mm, right=4mm of f1] (f2) {\textbf{Platform}\\P1: Xeon, 2 vCPU (KVM)\\P2: Ryzen APU + iGPU};
+  \node[box, text width=33mm, right=4mm of f2] (f3) {\textbf{Scenario}\\iso: isolated\\intf: memory co-runner\\(AMC 20-193 channel)};
+  \node[box, text width=36mm, right=4mm of f3] (f4) {\textbf{Metrics}\\throughput $\cdot$ latency\\init / build / first launch\\jitter $\cdot$ tail $\cdot$ pWCET (EVT)};
+  \node[font=\scriptsize, text=cInkTwo, below=2mm of $(f2.south)!0.5!(f3.south)$] {Each configuration numerically cross-validated; 20 warm-up + 300--5000 timed samples};
+\end{tikzpicture}

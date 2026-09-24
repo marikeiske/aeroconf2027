@@ -1,0 +1,9 @@
+domain,metric,n
+Automotive,Mean performance,5
+Automotive,Schedulability/WCET,1
+Avionics,Mean performance,1
+Avionics,Qualitative only,1
+Embedded/edge,Mean performance,8
+Embedded/edge,Qualitative only,1
+Generic critical,Latency/overhead,2
+Space/radar,Mean performance,5

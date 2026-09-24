@@ -1,0 +1,27 @@
+% Figure 4 -- One-time runtime costs vs. steady-state median, GEMM 256 (ms). Values are medians (see Table 3).
+\begin{tikzpicture}
+\begin{axis}[aeroconf,
+  width=0.42\linewidth, height=0.85\linewidth, scale only axis,
+  xmode=log, xmin=0.4, xmax=1500, ymin=-0.6, ymax=8.6, y dir=reverse,
+  xlabel={time (ms, log) --- GEMM 256},
+  ytick={0,...,8}, ymajorgrids=true, xmajorgrids=true,
+  yticklabels={P1 OpenCL Intel, P1 OpenCL PoCL (cold cache), P1 OpenCL PoCL (warm cache), P1 SYCL OMP AOT USM,
+               P1 SYCL OMP JIT USM (cold cache), P1 SYCL OMP JIT USM (warm cache), P1 SYCL\textrightarrow{}OCL Intel USM (cold cache),
+               P1 SYCL\textrightarrow{}OCL Intel USM (warm cache), P2 OpenCL AMD iGPU},
+  y tick label style={font=\scriptsize},
+  legend style={at={(0.1,-0.2)}, anchor=north, legend columns=2, font=\scriptsize}]
+  % init: platform/context/queue creation
+  \addplot[only marks, mark=*, mark size=2.2pt, cNative] coordinates {
+    (45.70,0) (39.92,1) (39.37,2) (67.38,3) (18.72,4) (17.64,5) (65.30,6) (66.58,7) (839.44,8)};
+  % build: OpenCL online compilation (clBuildProgram); SYCL has no separate build step
+  \addplot[only marks, mark=square*, mark size=2.2pt, cOpenCL] coordinates {
+    (421.49,0) (676.41,1) (33.85,2) (513.39,8)};
+  % first launch (includes SYCL lazy JIT)
+  \addplot[only marks, mark=diamond*, mark size=2.8pt, cSYCL] coordinates {
+    (2.04,0) (688.01,1) (24.71,2) (5.70,3) (272.35,4) (3.68,5) (248.96,6) (156.27,7) (1.31,8)};
+  % steady-state median latency
+  \addplot[only marks, mark=|, mark size=4pt, very thick, cInk] coordinates {
+    (1.86,0) (24.52,1) (24.52,2) (4.24,3) (1.52,4) (1.52,5) (1.87,6) (1.87,7) (0.66,8)};
+  \legend{init (platform/context/queue), build (OpenCL online compile), first launch (incl.\ SYCL JIT), steady-state median}
+\end{axis}
+\end{tikzpicture}

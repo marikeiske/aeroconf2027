@@ -1,0 +1,5 @@
+tag,sc,pw6_ms,iid
+p2gpu,iso,20.62500753054162,False
+p2gpu,intf,37.07297530473619,True
+p1sycl,iso,6.561038625115405,False
+p1sycl,intf,140.54948765432874,False

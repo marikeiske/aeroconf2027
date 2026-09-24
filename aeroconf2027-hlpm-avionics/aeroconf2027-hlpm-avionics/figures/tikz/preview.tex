@@ -1,0 +1,19 @@
+% preview.tex -- compiles all figures (IEEE two-column geometry: column 3.375 in, text 7.0 in)
+\documentclass[10pt]{article}
+\usepackage[letterpaper, margin=0.75in]{geometry}
+\usepackage{mathptmx}
+\usepackage{caption}
+\newcommand{\figdata}{data}
+\input{aeroconf-figstyle}
+\newlength{\colw}\setlength{\colw}{3.375in}
+\begin{document}
+\newcommand{\colfig}[2]{\begin{figure}[p]\centering\begin{minipage}{\colw}\centering\input{#1}\end{minipage}\caption{#2}\end{figure}}
+\newcommand{\widefig}[2]{\begin{figure}[p]\centering\begin{minipage}{\textwidth}\centering\input{#1}\end{minipage}\caption{#2}\end{figure}}
+\colfig{fig1_msl}{Systematic mapping (column width).}
+\widefig{fig2_method}{Workloads and experimental factors (text width).}
+\colfig{fig3_perf_heatmap}{Normalized median latency on P1 (column width).}
+\colfig{fig4_overhead}{Runtime phase costs (column width).}
+\colfig{fig5_tail}{Tail ratio (column width).}
+\widefig{fig6_ecdf}{ECDFs on P2 (text width).}
+\widefig{fig7_evt}{EVT exceedance (text width).}
+\end{document}

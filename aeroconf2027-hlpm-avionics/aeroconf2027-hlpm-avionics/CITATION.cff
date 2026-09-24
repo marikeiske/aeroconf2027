@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software or data, please cite the paper below."
+title: "Evaluation of High-Level Programming Models for Critical Heterogeneous Avionics — artifact"
+type: software
+authors:
+  - family-names: "Moreira"
+    given-names: "Mariana Keiske de M."
+    affiliation: "Aeronautics Institute of Technology (ITA)"
+  - family-names: "Loubach"
+    given-names: "Denis Silva"
+    affiliation: "Aeronautics Institute of Technology (ITA)"
+license: MIT
+version: "1.0.0"
+date-released: "2026-10-01"
+keywords:
+  - SYCL
+  - OpenCL
+  - avionics
+  - DO-178C
+  - AMC 20-193
+  - timing predictability
+  - pWCET
+preferred-citation:
+  type: conference-paper
+  title: "Evaluation of High-Level Programming Models for Critical Heterogeneous Avionics"
+  authors:
+    - family-names: "Moreira"
+      given-names: "Mariana Keiske de M."
+    - family-names: "Loubach"
+      given-names: "Denis Silva"
+  collection-title: "Proceedings of the IEEE Aerospace Conference"
+  year: 2027

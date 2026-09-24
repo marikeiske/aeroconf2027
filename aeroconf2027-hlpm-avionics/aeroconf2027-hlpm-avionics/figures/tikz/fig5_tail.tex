@@ -1,0 +1,31 @@
+% Figure 5 -- Tail ratio p99.9/median per configuration (median over kernels and sizes).
+% Hollow = isolated, filled = with memory co-runner. Each \dumbbell{row}{iso}{intf}{color}.
+\begin{tikzpicture}
+\begin{axis}[aeroconf,
+  width=0.5\linewidth, height=0.85\linewidth, scale only axis, xmode=log, xmin=1.45, xmax=8, ymin=-0.6, ymax=9.6, y dir=reverse,
+  xtick={1.5,2,3,4,6,8}, xticklabels={1.5,2,3,4,6,8}, minor xtick={}, xlabel={tail ratio p99.9 / median (log)},
+  ytick={0,...,9}, y tick label style={font=\scriptsize},
+  yticklabels={P2~~OpenCL AMD iGPU, P2~~C++ serial, P1~~C++ serial, P1~~OpenCL PoCL, P1~~SYCL OMP AOT USM, P1~~SYCL\textrightarrow{}OCL Intel buf, P1~~SYCL OMP JIT buf, P1~~SYCL\textrightarrow{}OCL Intel USM, P1~~SYCL OMP JIT USM, P1~~OpenCL Intel},
+  legend style={at={(0.2,-0.18)}, anchor=north, legend columns=5, font=\scriptsize}]
+  \def\dumbbell#1#2#3#4{%
+    \addplot[cGrid, line width=2.2pt, forget plot] coordinates {(#2,#1) (#3,#1)};%
+    \addplot[only marks, mark=*, mark size=2.2pt, draw=#4, fill=white, thick, forget plot] coordinates {(#2,#1)};%
+    \addplot[only marks, mark=*, mark size=2.2pt, #4, forget plot] coordinates {(#3,#1)};}
+  \dumbbell{0}{3.79}{7.11}{cOpenCL}  % P2 OpenCL AMD iGPU
+  \dumbbell{1}{1.64}{6.33}{cNative}  % P2 C++ serial
+  \dumbbell{2}{1.84}{2.26}{cNative}  % P1 C++ serial
+  \dumbbell{3}{1.95}{2.11}{cOpenCL}  % P1 OpenCL PoCL
+  \dumbbell{4}{2.13}{2.08}{cSYCL}  % P1 SYCL OMP AOT USM
+  \dumbbell{5}{1.77}{2.05}{cSYCL}  % P1 SYCL→OCL Intel buf
+  \dumbbell{6}{1.73}{2.01}{cSYCL}  % P1 SYCL OMP JIT buf
+  \dumbbell{7}{1.92}{1.97}{cSYCL}  % P1 SYCL→OCL Intel USM
+  \dumbbell{8}{1.94}{1.82}{cSYCL}  % P1 SYCL OMP JIT USM
+  \dumbbell{9}{1.69}{1.61}{cOpenCL}  % P1 OpenCL Intel
+  % legend entries
+  \addlegendimage{only marks, mark=*, draw=cInkTwo, fill=white, thick}\addlegendentry{isolated}
+  \addlegendimage{only marks, mark=*, cInkTwo}\addlegendentry{with interference}
+  \addlegendimage{only marks, mark=square*, cNative}\addlegendentry{Native}
+  \addlegendimage{only marks, mark=square*, cOpenCL}\addlegendentry{OpenCL}
+  \addlegendimage{only marks, mark=square*, cSYCL}\addlegendentry{SYCL}
+\end{axis}
+\end{tikzpicture}

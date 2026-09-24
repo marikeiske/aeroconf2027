@@ -1,0 +1,35 @@
+% aeroconf-figstyle.tex -- shared style for all figures of the AeroConf 2027 paper
+% Usage (preamble):  \newcommand{\figdata}{tikz_figures/data}  % folder with the .dat files
+%                    \input{tikz_figures/aeroconf-figstyle}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots,colormaps}
+\usetikzlibrary{positioning,arrows.meta,calc,backgrounds}
+\providecommand{\figdata}{tikz_figures/data}
+
+% ---- colors (one color per programming-model family, colorblind-safe)
+\definecolor{cNative}{HTML}{2A78D6}   % native C++ (blue)
+\definecolor{cOpenCL}{HTML}{EB6834}   % OpenCL (orange)
+\definecolor{cSYCL}{HTML}{1BAF7A}     % SYCL (aqua/green)
+\definecolor{cInk}{HTML}{0B0B0B}
+\definecolor{cInkTwo}{HTML}{52514E}
+\definecolor{cGrid}{HTML}{DCDCD8}
+\definecolor{cBubble}{HTML}{86B6EF}
+\definecolor{cBubbleEdge}{HTML}{1C5CAB}
+
+% ---- common axis look
+\pgfplotsset{
+  aeroconf/.style={
+    font=\footnotesize,
+    axis line style={cInkTwo},
+    tick style={cInkTwo},
+    tick label style={font=\scriptsize, text=cInkTwo},
+    label style={font=\footnotesize},
+    grid=major, major grid style={cGrid, line width=0.4pt},
+    axis x line*=bottom, axis y line*=left,
+    legend style={font=\scriptsize, draw=none, fill=none},
+    legend cell align=left,
+  },
+}

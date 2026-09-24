@@ -1,0 +1,20 @@
+% Figure 7 -- Empirical exceedance probability (dots) and fitted Generalized Pareto tails (lines), GEMM 256.
+% Hollow = isolated, filled = interference. pWCET values at 1e-6 come from \figdata/fig7_summary.csv.
+\begin{tikzpicture}
+\begin{groupplot}[aeroconf,
+  group style={group size=2 by 1, horizontal sep=8mm, y descriptions at=edge left},
+  width=0.5\linewidth, height=0.32\linewidth, xmode=log, ymode=log, ymin=1e-7, ymax=1.2,
+  xlabel={latency ($\mu$s, log)}, ylabel={exceedance probability},
+  legend style={at={(0.5,-0.42)}, anchor=north, font=\scriptsize, draw=none}]
+  \nextgroupplot[title={P2 OpenCL AMD iGPU --- GEMM 256}, title style={font=\footnotesize}]
+    \addplot[only marks, mark=o, mark size=0.9pt, cOpenCL!70, forget plot] table {\figdata/fig7_p2gpu_iso_emp.dat};
+    \addplot[only marks, mark=*, mark size=0.9pt, cOpenCL, forget plot] table {\figdata/fig7_p2gpu_intf_emp.dat};
+    \addplot[cInk, thick] table {\figdata/fig7_p2gpu_iso_gpd.dat};          \addlegendentry{isolated: pWCET$(10^{-6})=20.6$ ms (i.i.d.\ rejected)}
+    \addplot[cInk, thick, dashed] table {\figdata/fig7_p2gpu_intf_gpd.dat}; \addlegendentry{interference: pWCET$(10^{-6})=37.1$ ms}
+  \nextgroupplot[title={P1 SYCL\textrightarrow{}OCL Intel USM --- GEMM 256}, title style={font=\footnotesize}]
+    \addplot[only marks, mark=o, mark size=0.9pt, cSYCL!70, forget plot] table {\figdata/fig7_p1sycl_iso_emp.dat};
+    \addplot[only marks, mark=*, mark size=0.9pt, cSYCL, forget plot] table {\figdata/fig7_p1sycl_intf_emp.dat};
+    \addplot[cInk, thick] table {\figdata/fig7_p1sycl_iso_gpd.dat};          \addlegendentry{isolated: pWCET$(10^{-6})=6.6$ ms (i.i.d.\ rejected)}
+    \addplot[cInk, thick, dashed] table {\figdata/fig7_p1sycl_intf_gpd.dat}; \addlegendentry{interference: pWCET$(10^{-6})=140.5$ ms (i.i.d.\ rejected)}
+\end{groupplot}
+\end{tikzpicture}

@@ -1,0 +1,23 @@
+% Figure 1 -- Systematic mapping: domain (MQ3) x reported metric (MQ2). Edit counts in the \bubble lines.
+\begin{tikzpicture}
+\begin{axis}[aeroconf,
+  width=0.68\linewidth, height=0.62\linewidth, scale only axis,
+  xmin=-0.6, xmax=4.6, ymin=-0.6, ymax=5.6, y dir=reverse,
+  xtick={0,...,4}, ytick={0,...,5},
+  xticklabels={Avionics, {Auto-\\motive}, {Space/\\radar}, {Embed-\\ded}, {Generic\\critical}},
+  x tick label style={align=center},
+  yticklabels={Mean performance, Latency/overhead, Schedulability/WCET, Tail/jitter/pWCET, Interference, Qualitative only},
+  axis x line*=bottom, axis y line*=left, clip=false]
+  % \bubble{x}{y}{number of studies}
+  \def\bubble#1#2#3{%
+    \addplot[only marks, mark=*, mark size={3pt+2.4pt*sqrt(#3)}, draw=cBubbleEdge, fill=cBubble] coordinates {(#1,#2)};%
+    \node[font=\scriptsize] at (axis cs:#1,#2) {#3};}
+  \bubble{0}{0}{1}  \bubble{1}{0}{5}  \bubble{2}{0}{5}  \bubble{3}{0}{8}
+  \bubble{4}{1}{2}
+  \bubble{1}{2}{1}
+  \bubble{0}{5}{1}  \bubble{3}{5}{1}
+  % this work
+  \addplot[only marks, mark=star, mark size=4pt, cOpenCL, very thick] coordinates {(0,3) (0,4)};
+  \node[font=\scriptsize, text=cInkTwo, anchor=west] at (axis cs:0.25,3.5) {this work};
+\end{axis}
+\end{tikzpicture}
