@@ -94,7 +94,7 @@ The TikZ versions are in `figures/tikz/` (see its README for use in Overleaf).
 
 ## Acknowledgements
 
-Laboratory infrastructure provided by the Computer Engineering Division (IEC) of the Aeronautics Institute of Technology (ITA). This work was supported by FAPESP and developed within the Engineering Research Center for Air Mobility of the Future (Flymov), a partnership among ITA, Embraer, and FAPESP.
+Laboratory infrastructure provided by the Computer Science Division (IEC) of the Aeronautics Institute of Technology (ITA). This work was supported by FAPESP and developed within the Engineering Research Center for Air Mobility of the Future (Flymov), a partnership among ITA, Embraer, and FAPESP.
 
 ## How to cite
 
