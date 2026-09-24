@@ -88,7 +88,7 @@ The TikZ versions are in `figures/tikz/` (see its README for use in Overleaf).
 - `summary.csv`, `evt.csv`, `overhead_summary.csv`, `p2_rep_robustness.csv`: processed results used in the paper.
 
 ## License
-
+[![DOI](https://zenodo.org/badge/1385724567.svg)](https://doi.org/10.5281/zenodo.22942913)
 - Code (`src/`, `scripts/`): MIT License (`LICENSE`).
 - Data, figures, and the mapping list (`data/`, `figures/`, `msl/`): Creative Commons Attribution 4.0 (`LICENSE-DATA`).
 
