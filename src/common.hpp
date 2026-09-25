@@ -43,6 +43,18 @@ inline Args parse(int argc, char** argv) {
     else if (k == "-s") a.scenario = v;
     else if (k == "-o") a.out = v;
     else if (k == "-d") a.device = v;
+    else { std::fprintf(stderr, "unknown option '%s'\n", k.c_str()); std::exit(2); }
+  }
+  if (argc % 2 == 0) { std::fprintf(stderr, "option '%s' needs a value\n", argv[argc - 1]); std::exit(2); }
+  if (a.kernel != "gemm" && a.kernel != "conv" && a.kernel != "kalman" && a.kernel != "null") {
+    std::fprintf(stderr, "unknown kernel '%s' (gemm|conv|kalman|null)\n", a.kernel.c_str()); std::exit(2);
+  }
+  if (a.size <= 0 || a.iters <= 0 || a.warmup < 0) {
+    std::fprintf(stderr, "invalid -n/-i/-w (need n > 0, i > 0, w >= 0)\n"); std::exit(2);
+  }
+  // GEMM and Conv2D launch 16x16 work-groups over an n x n range (OpenCL/SYCL)
+  if ((a.kernel == "gemm" || a.kernel == "conv") && a.size % 16 != 0) {
+    std::fprintf(stderr, "-n must be a multiple of 16 for %s\n", a.kernel.c_str()); std::exit(2);
   }
   return a;
 }
@@ -174,6 +186,7 @@ struct Recorder {
     std::fclose(f);
     std::string mo = a.out + ".meta.csv";
     FILE* g = std::fopen(mo.c_str(), "a");
+    if (!g) { std::perror("meta csv"); return; }
     std::fseek(g, 0, SEEK_END);
     if (std::ftell(g) == 0)
       std::fprintf(g, "platform,model,impl,device,kernel,size,scenario,t_init_ns,t_build_ns,t_first_ns,max_rel_err\n");
