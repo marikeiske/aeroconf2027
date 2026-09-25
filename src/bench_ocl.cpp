@@ -42,6 +42,7 @@ int main(int argc, char** argv) {
 
   // build (source -> device binary, i.e., online/JIT compilation)
   std::string src = read_file("kernels.cl");
+  if (src.empty()) { std::fprintf(stderr, "cannot read kernels.cl (run from the directory that contains it)\n"); return 3; }
   const char* s = src.c_str(); size_t sl = src.size();
   t0 = now_ns();
   cl_program prog = clCreateProgramWithSource(ctx, 1, &s, &sl, &err); CK(err);

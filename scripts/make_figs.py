@@ -15,7 +15,6 @@ for f in ["data/p1_overhead.csv.meta.csv","data/p2_overhead.csv.meta.csv"]:
     for (p,l,sc),g in m.groupby(["platform","label","scenario"]):
         if l=="C++ serial": continue
         steady=S[(S.platform==p)&(S.label==l)&(S.kernel=="gemm")&(S["size"]==256)&(S.scenario=="iso")]["median"].values[0]/1e3
-        tag="" if sc in ("warm","ovh") else ""
         name=f"{p} {l}" + (f" ({sc} cache)" if sc in ("cold",) or (sc=="warm" and l in ("OpenCL PoCL","SYCL OMP JIT USM","SYCL→OCL Intel USM")) else "")
         rows.append(dict(label=name,t_init_ms=g.t_init_ns.median()/1e6,t_build_ms=max(g.t_build_ns.median()/1e6,1e-3),
                          t_first_ms=g.t_first_ns.median()/1e6,steady_ms=steady))
