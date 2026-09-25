@@ -3,7 +3,6 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "scripts"))
 from analysis import load, LABEL, pwcet
 from scipy import stats
-import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 os.chdir(ROOT)  # data/ paths below are relative to the repository root

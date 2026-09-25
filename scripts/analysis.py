@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """analysis.py - statistics, hypothesis tests, EVT/pWCET and figures for the AeroConf 2027 paper."""
-import json, sys, os, glob
+import os, glob
 import numpy as np, pandas as pd
 from scipy import stats
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-import os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 D = os.path.join(ROOT, "data")
 FIG = os.path.join(ROOT, "figures", "png")

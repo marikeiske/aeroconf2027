@@ -3,7 +3,7 @@
 Every figure in the paper, redone in editable TikZ/pgfplots and drawn from the real measurement data.
 
 ## How to use in Overleaf
-1. Upload the whole `tikz_figures/` folder to the root of the Overleaf project.
+1. Upload the contents of this folder (`figures/tikz/`) as a folder named `tikz_figures/` to the root of the Overleaf project.
 2. In the paper preamble:
    ```latex
    \newcommand{\figdata}{tikz_figures/data}
@@ -41,5 +41,5 @@ Tip: to speed up Overleaf compilation, you can enable `\usetikzlibrary{external}
 
 - Colors: set once in `aeroconf-figstyle.tex` (`cNative`, `cOpenCL`, `cSYCL`). The palette is colorblind-safe.
 - Fonts follow the document (`\footnotesize`/`\scriptsize`), which makes them compatible with the IEEE template.
-- The `.dat` files were exported by `scripts/export_tikz_data.py` (reproducibility package) from the raw measurements. If the experiments are rerun, just re-export them.
+- The `.dat` files were exported by `figures/tikz/export_tikz_data.py` from the raw measurements in `data/`. If the experiments are rerun, re-export them with `python figures/tikz/export_tikz_data.py` (run `scripts/analysis.py` and `scripts/make_figs.py` first, since it reads `data/summary.csv` and `data/overhead_summary.csv`).
 - Requirements: TikZ/pgfplots with `compat=1.18` (standard in Overleaf and TeX Live 2021+).
