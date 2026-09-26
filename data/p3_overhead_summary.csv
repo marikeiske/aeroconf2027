@@ -1,0 +1,4 @@
+cfg,t_init_ns,t_build_ns,t_first_ns
+cpp/serial/gemm/ovh,0.0,0.0,4.0037
+opencl/nvidia-ocl/gemm/ovh,198.05405,12.1631,0.12145
+opencl/nvidia-ocl/gemm/ovh_cold,864.62425,129.2745,0.15125

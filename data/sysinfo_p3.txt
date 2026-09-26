@@ -1,0 +1,20 @@
+Platform P3 (collected 2026-09-25)
+=== System ===
+Microsoft Windows 11 Pro build 26200 (64-bit), 31.9 GB RAM
+Power plan: High performance; VBS/Hyper-V: off
+
+=== CPU ===
+AMD Ryzen 9 5900X 12-Core Processor | 12 cores / 24 threads | 2 CCDs (6 cores each, 32 MB L3 per CCD)
+
+=== GPU ===
+NVIDIA GeForce RTX 4060 Ti, 8188 MiB, max SM clock 3105 MHz, driver 616.92 (Windows 32.0.16.1692)
+OpenCL platform: "NVIDIA CUDA" (no CPU OpenCL runtime installed by default)
+
+=== Toolchains used for P3 ===
+C++/OpenCL binaries: MinGW-w64 GCC 13.2 (cross-compiled, -O2, static), OpenCL 1.2 via the driver's OpenCL.dll
+SYCL: Intel oneAPI DPC++/C++ Compiler 2025.1.1 (icx -fsycl), with MSVC 14.44 (VS Build Tools 2022)
+OpenCL CPU runtime: Intel(R) OpenCL 2025.19.4.0.18 (shipped with oneAPI), selected via OCL_ICD_FILENAMES
+Other software running: Kaspersky real-time protection (not disabled)
+Pinning: critical thread on logical CPU 0 (core 0, CCD0)
+  intf    : co-runner (enemy, 4 threads, 64 MiB) on logical CPUs 20-23 (CCD1, no shared L3)
+  intf_l3 : co-runner on logical CPUs 2,4,6,8 (cores 1-4, CCD0, shared L3)

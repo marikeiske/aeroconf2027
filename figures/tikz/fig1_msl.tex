@@ -10,8 +10,9 @@
   axis x line*=bottom, axis y line*=left, clip=false]
   % \bubble{x}{y}{number of studies}
   \def\bubble#1#2#3{%
-    \addplot[only marks, mark=*, mark size={3pt+2.4pt*sqrt(#3)}, draw=cBubbleEdge, fill=cBubble] coordinates {(#1,#2)};%
-    \node[font=\scriptsize] at (axis cs:#1,#2) {#3};}
+    \addplot[only marks, mark=*, mark size={3pt+2.4pt*sqrt(#3)}, draw=cBubbleEdge, fill=cBubble,
+      nodes near coords={#3}, every node near coord/.style={font=\scriptsize\bfseries, text=cInk, anchor=center}]
+      coordinates {(#1,#2)};}
   \bubble{0}{0}{1}  \bubble{1}{0}{5}  \bubble{2}{0}{5}  \bubble{3}{0}{8}
   \bubble{4}{1}{2}
   \bubble{1}{2}{1}

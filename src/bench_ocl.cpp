@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
   rec.t_init = now_ns() - t0;
   std::string pn(pname);
   rec.impl = pn.find("Portable") != std::string::npos ? "pocl" : pn.find("Intel") != std::string::npos ? "intel-ocl"
-           : pn.find("AMD") != std::string::npos ? "amd-ocl" : pn;
+           : pn.find("AMD") != std::string::npos ? "amd-ocl" : pn.find("NVIDIA") != std::string::npos ? "nvidia-ocl" : pn;
   rec.dev = want_gpu ? "gpu" : "cpu";
   std::fprintf(stderr, "platform=%s device=%s\n", pname, dname);
 

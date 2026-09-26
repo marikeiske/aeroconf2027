@@ -21,7 +21,12 @@ int main(int argc, char** argv) {
 #define ACPP_FLAVOR "jit"
 #endif
   const bool ocl_be = be.find("OpenCL") != std::string::npos || be.find("Intel") != std::string::npos || be.find("Portable") != std::string::npos;
-  rec.impl = std::string("acpp-") + (ocl_be ? "ocl" : "omp") + "-" + ACPP_FLAVOR + "-" + (usm ? "usm" : "buf");
+#ifdef __INTEL_LLVM_COMPILER
+  const char* impl_prefix = "dpcpp-";   // Intel oneAPI DPC++
+#else
+  const char* impl_prefix = "acpp-";    // AdaptiveCpp
+#endif
+  rec.impl = std::string(impl_prefix) + (ocl_be ? "ocl" : "omp") + "-" + ACPP_FLAVOR + "-" + (usm ? "usm" : "buf");
   rec.dev = d.is_gpu() ? "gpu" : "cpu";
   std::fprintf(stderr, "platform=%s device=%s\n", be.c_str(), d.get_info<sycl::info::device::name>().c_str());
 
