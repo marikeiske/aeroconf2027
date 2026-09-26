@@ -10,8 +10,8 @@ authors:
     given-names: "Denis Silva"
     affiliation: "Aeronautics Institute of Technology (ITA)"
 license: MIT
-version: "1.0.0"
-date-released: "2026-10-01"
+version: "1.1.0"
+date-released: "2026-09-26"
 keywords:
   - SYCL
   - OpenCL
