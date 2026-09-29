@@ -25,6 +25,8 @@ scripts/    campaigns and analysis
     p3_fp_control.bat, machine_inventory.ps1
   analysis.py        summary statistics, run-to-run robustness, EVT/pWCET
   h1_bootstrap.py    95% moving-block bootstrap CIs for the H1 ratios (Table 2 of the paper)
+  h3_eta2.py         eta squared of configuration, kernel and size for H3 (Section 5)
+  warmup_check.py    deviation of the first 50 samples from the series median (warm-up check, Section 5)
   p3_analysis.py, p3_sycl_analysis.py, p3_l3_analysis.py   analysis of the P3 campaigns
   make_figs.py, figs.py, fig_msl.py      publication figures (PNG)
 data/       raw and processed measurements (see "Data dictionary")
@@ -103,6 +105,8 @@ python scripts/analysis.py      # data/summary.csv + robustness
 python scripts/make_figs.py     # figures/png/fig1..fig6
 python scripts/fig_msl.py       # figures/png/fig7_msl.png (Figure 1 in the paper)
 python scripts/h1_bootstrap.py  # data/h1_bootstrap_ci.csv (Table 2)
+python scripts/h3_eta2.py       # data/h3_eta2.csv (H3: eta squared per factor)
+python scripts/warmup_check.py  # data/warmup_check.csv (warm-up check)
 python scripts/p3_analysis.py; python scripts/p3_sycl_analysis.py; python scripts/p3_l3_analysis.py   # P3
 ```
 ```bash
@@ -116,7 +120,7 @@ The TikZ versions are in `figures/tikz/` (see its README for use in Overleaf).
   Columns: `platform, model, impl, device, kernel, size, scenario, iter, lat_ns` (kernel latency, data resident), `e2e_ns` (including host↔device transfers; −1 for the null kernel).
 - `*.meta.csv`: one row per process. Columns: `t_init_ns` (platform/context/queue), `t_build_ns` (OpenCL program build), `t_first_ns` (first launch, including SYCL JIT), `max_rel_err` (validation against the serial reference).
 - `p1_overhead*.csv`, `p2_overhead*.csv`: start-up study; `scenario` = `cold`/`warm` refers to the persistent on-disk kernel cache.
-- `summary.csv`, `evt.csv`, `overhead_summary.csv`, `p2_rep_robustness.csv`, `h1_bootstrap_ci.csv`: processed results used in the paper.
+- `summary.csv`, `evt.csv`, `overhead_summary.csv`, `p2_rep_robustness.csv`, `h1_bootstrap_ci.csv`, `h3_eta2.csv`, `warmup_check.csv`: processed results used in the paper.
 - P3 (supplementary), same column layout:
   - `p3_rep{1,2,3}.csv`, `p3_overhead.csv`: campaign 1 (`impl` = `serial`, `openmp`, `nvidia-ocl`).
   - `p3s_rep{1,2,3}.csv`, `p3s_overhead.csv`, `p3s_fpcheck.csv`: campaign 2 (`impl` = `intel-ocl`, `dpcpp-ocl-{jit,aot}-{usm,buf}`, `dpcpp-ocl-jitprecise-usm`).
@@ -126,6 +130,7 @@ The TikZ versions are in `figures/tikz/` (see its README for use in Overleaf).
 
 ## Changelog
 
+- **1.1.1** (2026-09-29): `h3_eta2.py` and `warmup_check.py` added, with their outputs, so that every number in Section 5 is reproducible from a script.
 - **1.1.0** (2026-09-26)
   - Repository layout moved to the root.
   - Stricter input validation in the harness. It only affects invalid command lines; all campaigns use valid ones.

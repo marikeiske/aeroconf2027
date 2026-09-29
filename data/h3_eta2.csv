@@ -1,0 +1,13 @@
+platform,response,factor,n_series,eta2
+P1,median_inflation,configuration,48,0.1429099538177252
+P1,median_inflation,kernel,48,0.011776432130721463
+P1,median_inflation,size,48,0.19640757985972712
+P1,tail_ratio_intf,configuration,48,0.19172359654768148
+P1,tail_ratio_intf,kernel,48,0.005913301794305112
+P1,tail_ratio_intf,size,48,0.13425852580663078
+P2,median_inflation,configuration,12,0.5091735945431405
+P2,median_inflation,kernel,12,0.03040702682538417
+P2,median_inflation,size,12,0.09509248646155834
+P2,tail_ratio_intf,configuration,12,0.0036596139710671502
+P2,tail_ratio_intf,kernel,12,0.20189411176135796
+P2,tail_ratio_intf,size,12,0.3044906624999609
