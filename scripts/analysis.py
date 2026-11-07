@@ -86,6 +86,9 @@ def pwcet(v, probs=(1e-3, 1e-6, 1e-9), q=0.90):
 if __name__ == "__main__":
     p1 = load("p1_results.csv", rep=1)
     p2 = pd.concat([load("p2_results.csv", rep=1), load("p2_rep2.csv", rep=2), load("p2_rep3.csv", rep=3)], ignore_index=True)
+    # The null kernel only measures dispatch overhead; summary.csv and the robustness table cover the
+    # compute kernels (gemm, conv, kalman), as every downstream script expects.
+    p1, p2 = p1[p1.kernel != "null"], p2[p2.kernel != "null"]
     allr = pd.concat([p1, p2], ignore_index=True)
     S = summarize(allr[allr.rep == 1])
     S.to_csv(os.path.join(D, "summary.csv"), index=False)
